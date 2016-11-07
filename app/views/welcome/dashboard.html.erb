@@ -1,0 +1,9 @@
+<% @proyects.each do |proyect| %>
+	<h1> <%= link_to proyect.title, proyect  %> </h1>
+	<div>
+		<%= Sanitize.fragment(proyect.body, Sanitize::Config::RELAXED).html_safe %> -<%= link_to "Eliminar",proyect, class:"red", method: :delete %>
+		<% if proyect.may_finish_it? %>
+		 - <%= link_to "finalizar","/proyects/#{proyect.id}/finish_it", class:"blue", method: :put %>
+		 <%end%>
+	</div>
+<% end %>

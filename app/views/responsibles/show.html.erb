@@ -1,0 +1,40 @@
+
+ <article class=" post col-md-9 clearfix" >
+  <% unless @responsible.photo.url.nil? %>
+    <img class="thumbnail img-medium" src="<%= @responsible.photo.url(:thumb)%>" alt="<%= @responsible.photo_file_name %>">
+  <% end %>
+  <div class="row">
+    <div class="col-xs-12  col-sd-10 col-md-12  ">
+      <h1 class="text-center"> <%= @responsible.first_name %> <%= @responsible.last_name %> </h1>
+      <p class="text-justify text-left">
+        <strong>Member Since:</strong>
+        <%= @responsible.created_at %>
+      </p>
+      <p class="text-justify text-left">
+        <strong>Email:</strong>
+        <%= @responsible.email %>
+      </p>
+      <div class="text-justify center-block">
+        <strong>Address </strong>
+        <%=truncate(@responsible.address,lenght:60) %>
+      </div>
+    </div> 
+     <div class="col-xs-12 " style=" margin-top: 1em;">
+          <p>
+            <strong>Current Projects (<%= @responsible.proyects.count %>)</strong>
+            <% @responsible.proyects.each do | rproject |%>
+                - <%= link_to rproject.title, rproject %>
+            <% end %>
+          </p>
+    </div> 
+    <div class=" actions col-xs-12 text-center">
+       
+        <% if user_signed_in? %>
+           <% if current_user.is_editor? %>
+           <%= link_to "Edit", edit_responsible_path(@responsible), class:"btn btn-success underline" %> 
+            <%end%>
+        <%end%>
+         <%= link_to "Back", responsibles_path, class:"btn btn-warning underline" %> 
+    </div>
+  </div>
+</article>

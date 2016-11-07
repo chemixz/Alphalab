@@ -1,0 +1,43 @@
+<%= form_for(@category) do |f| %>
+ 
+ <div class="row">
+   <div class="col-xs-12">
+     <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <table class="table table-striped ">
+      <thead>
+        <th width="35%" class="text-center"> <%= f.label :name %></th>
+        <th width="35%" class="text-center">  <%= f.label :color %><br></th>
+        <th width="30%" class="text-center">Actions</th>
+      </thead>
+      <tbody>
+        <td class="text-center"> 
+          <div class="field">
+            <%= f.text_field :name %>
+          </div>
+        </td>
+        <td class="text-center">
+          <div class="field">
+           <%= f.color_field :color %>
+          </div>
+        </td>
+        <td class="text-center">
+          <div class="  ">
+            <%= f.submit class:"btn btn-primary" %>
+          </div>
+        </td>
+      </tbody>
+    </table>
+   </div>
+ </div>
+ 
+<% end %>

@@ -1,0 +1,33 @@
+<article class="  col-md-9 clearfix" >
+    <div class="row">
+      <div class="col-xs-12">
+         <h1>User</h1>
+      </div> 
+      <div class="col-xs-12 " style="margin-top: 1em;">
+       <table class="table table-striped">
+          <thead>
+            <tr>
+              <th width="20%">Email</th>
+              <th width="20%" >Access Level</th>
+               <th width="20%" >Nick Name</th>
+              <th width="40%" colspan="3" class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+              <td><%= @user.email %></td>
+              <td><%= @user.permission_level %></td>
+              <td><%= @user.nickname %></td>
+              <td class="text-center"><%= link_to "<span class=\"orange glyphicon glyphicon-sunglasses\"></span>".html_safe , @user  %></td>
+              <td class="text-center"><%= link_to "<span class=\"green glyphicon glyphicon-edit\"></span>".html_safe, edit_user_path(@user) %></td>
+              <td class="text-center"><%= link_to  "<span class=\"red glyphicon glyphicon-trash\"></span>".html_safe, @user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tbody>
+        </table>
+      </div>
+      <div class="actions col-xs-12 text-center">
+        <%= link_to 'Back',  users_path ,class:'btn btn-warning'%>
+      </div>
+    </div>
+</article>
+
+

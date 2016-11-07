@@ -1,0 +1,11 @@
+<article class="  col-md-9 clearfix" >
+	<div class="col-xs-12 text-center margin-botom">
+		<h1 style="color: <%= @category.color %>;"> <%= @category.name %></h1>
+	</div>
+	
+	<%= render @cate %>
+	<div class="text-center">
+		<%= will_paginate @cate%>
+	</div>
+</article>
+	

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta class="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AlphaLab</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header>
+		<%= render "partials/navigation" %>
+	</header>
+	<div class="main container">
+		<div class="row">
+			<section class="posts col-md-9">
+				<div style=" <%= "display:none" if notice.nil? %> ">
+					<p id="notice"><%= notice %></p>
+				</div>
+				<div style="<%= "display:none" if alert.nil? %> ">
+					<%= alert%>
+				</div>
+			</section>
+			<%= yield %> <!-- YIELD -->
+			<%= render "partials/aside" %>
+		</div> 
+	</div>
+	<%= render "partials/footer" %>
+	
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</body>
+</html>

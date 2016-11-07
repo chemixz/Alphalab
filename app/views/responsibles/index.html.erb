@@ -1,0 +1,64 @@
+ <article class="  col-md-9 clearfix" >
+    
+    <div class="text-center">
+         <h2>Listing Responsibles</h2>
+    </div>
+     <div class="text-center">
+      <%= will_paginate @proyects%>
+    </div>
+    <div class="col-xs-12">
+      <p>
+       <%= link_to 'New Responsible', new_responsible_path , class:"btn btn-primary" %>
+      </p>
+    </div>
+   <% @responsibles.each do |responsible| %>
+    <div class="row post">
+        <div class="col-xs-12 col-sm-4">
+           <img class="img-thumbnail" src="<%= responsible.photo.url(:thumb)%>" alt="<%= responsible.photo_file_name %>">
+        </div>
+
+        <div class="col-xs-12 col-sm-8">
+            <h2 class="post-title">
+             <%= link_to responsible.first_name, responsible %> 
+            </h2>
+          
+            <p>
+              <strong>Member Since: </strong>
+              <em>
+                <%= responsible.created_at%>
+              </em>
+           
+            </p>
+            <p class="text-justify">
+              <strong>Address: </strong><%=truncate(responsible.address,lenght:60) %>
+            </p>
+            
+        </div>
+     
+        <div class="col-xs-12 " style=" margin-top: 1em;">
+          <p>
+            <strong>Current Projects (<%= responsible.proyects.count %>)</strong> 
+            <% responsible.proyects.each do | rproject |%>
+                - <%= link_to rproject.title, rproject %>
+            <% end %>
+          </p>
+        </div>
+         <div class="col-xs-12 text-center">
+              <%= link_to "<button class=\"btn btn-success\"> <span class=\" glyphicon glyphicon-edit\"></button> </span>".html_safe , edit_responsible_path(responsible) , alt:"Edit" , title:"Edit" %>
+              <% if user_signed_in? %>
+                <% if current_user.is_admin? %>
+                 <%= link_to  "<button class=\"btn btn-danger\"> <span class=\" glyphicon glyphicon-trash\"></button> </span>".html_safe  , responsible, alt:"Destroy" , title:"Destroy", method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%end%> 
+              <%end%> 
+         </div>
+      </div>
+   <% end %>
+   <div class="text-center">
+      <%= will_paginate @proyects%>
+    </div>
+</article>
+
+
+
+
+

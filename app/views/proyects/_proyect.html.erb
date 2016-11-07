@@ -1,0 +1,52 @@
+
+	<div class=" row post" >
+		<div class="col-xs-12 col-sm-4">
+
+			<a href="#" class="thumb pull-left">
+			 <img class="img-thumbnail" src="<%= proyect.cover.url(:thumb)%>" alt="<%= proyect.cover_file_name %>">
+			</a>
+		</div>
+
+		<div class="col-xs-12 col-sm-8">
+			<h2 class="post-title">
+				<%= link_to proyect.title, proyect %>
+			</h2>
+			<p>
+			 	<strong>Posted by</strong>
+				<span class="post-author">
+				<%= proyect.user.email %>
+				</span>
+				<strong>At</strong>
+				<span class=""> <%= proyect.created_at%> </span>
+			</p>
+			<p class="post-content text-justify">
+				<%= truncate(proyect.body, :ommision => "... Read More", :length => 155) %>
+			</p>
+			<p>
+			 	<strong>State :</strong>
+				<span class="post-author">	<%= proyect.state %></span>
+			</p>
+			<p>
+				<strong>Start :</strong>
+				<span class="post-author"><%= proyect.start_date %></span>
+			</p>
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			 <strong>Responsibles : (<%= proyect.responsibles.count %>)</strong>
+			<% proyect.responsibles.each do |responsible|%>
+	           -<%= link_to responsible.first_name, responsible %> 
+	        <% end %>
+		</div>
+		<div class="col-xs-12">
+			<% if user_signed_in? %>
+				<% if current_user.is_editor? %>
+					<div class="text-center">
+		              <%= link_to "<span class=\" btn btn-success glyphicon glyphicon-edit\"></span>".html_safe , edit_proyect_path(proyect) , alt:"Edit" , title:"Edit" %>
+		         <%end%>
+		      	<% if current_user.is_admin? %>
+		               <%= link_to  "<span class=\" btn btn-danger glyphicon glyphicon-trash\" ></span>".html_safe , proyect, alt:"Destroy" , title:"Destroy", method: :delete, data: { confirm: 'Are you sure?' } %>
+		            </div>
+	            <%end%>	
+            <%end%>	
+		</div>
+	</div>

@@ -1,0 +1,41 @@
+
+
+<div class="row">
+<h1>Listing Categories</h1>
+
+
+  <div class="col-sm-12">
+     
+        <a href="<%= new_category_path %>" class="btn btn-success" alt="Add Category " title="Add Category">
+          <span class="glyphicon glyphicon-edit"></span>&nbsp; Add Category 
+        </a>
+        
+      </div>
+  <div class="col-xs-12 col-sm-10 col-md-10">
+     <table class="table">
+        <thead>
+          <tr>
+            <th width="25%">Name</th>
+            <th width="25%">Color</th>
+            <th width="25%" colspan="3" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @categorias.each do |categoria| %>
+            <tr>
+              <td><%= categoria.name %></td>
+              <td style="color: <%= categoria.color %>;"><%= categoria.color %></td>
+              <td><%= link_to 'Mostrar', categoria %></td>
+              <td><%= link_to 'Editar', '/categorias/1' %></td>
+              <td><%= link_to 'Destruir', categoria, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+  </div>
+   
+</div>
+
+
+

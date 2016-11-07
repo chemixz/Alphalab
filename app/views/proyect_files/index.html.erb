@@ -1,0 +1,33 @@
+<article class="  col-md-9 clearfix" >
+  <div class="row">
+    <%= link_to 'New Proyect file', new_proyect_file_path %>
+
+    <h1>Listing Proyect Files</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Url img</th>
+          <th>Format img</th>
+          <th>Proyect</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @proyect_files.each do |proyect_file| %>
+          <tr>
+            <td><%= proyect_file.name %></td>
+            <td><%= proyect_file.url_img %></td>
+            <td><%= proyect_file.format_img %></td>
+            <td><%= proyect_file.proyect %></td>
+            <td><%= link_to 'Show', proyect_file %></td>
+            <td><%= link_to 'Edit', edit_proyect_file_path(proyect_file) %></td>
+            <td><%= link_to 'Destroy', proyect_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</article>
+

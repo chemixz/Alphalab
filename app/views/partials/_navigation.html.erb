@@ -1,0 +1,90 @@
+
+	<nav class="navbar navbar-static-default navbar-inverse navbar-static-top">
+	  <div class="container">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle toggle-left collapsed" data-toggle="collapse" data-target="#alphacollapse"v>
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <%= link_to "AlphaLab" , root_path ,class:"navbar-brand"%>
+			
+	    </div>
+   		<button type="button" class="navbar-toggle navbar-btn toggle-right" data-toggle="sidebar" data-target=".sidebar-right">
+          <span class="glyphicon glyphicon-user white" aria-hidden="true"></span>
+        </button>
+	   
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="alphacollapse">
+	     
+	     <%= form_tag( search_path, class: 'navbar-form navbar-left' ) do %>
+	        <div class="form-group">
+	          <input type="text" class="form-control" name="searcher[textsearch]" placeholder="Search">
+	           <select name="searcher[field]"  class="form-control">
+	              <option value="title">Title</option>
+	              <option value="body">Body</option>
+	              <option value="category">Category</option>
+	              <option value="responsible">Responsible</option>
+              </select>
+	        </div>
+          	<button type="submit" class="btn btn-primary">
+ 				<span class="glyphicon glyphicon-search"></span>
+ 			</button>
+	      <% end %>
+	      
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container -->
+	</nav>
+
+
+	<div class="col-xs-7 col-sm-2 col-md-2  sidebar sidebar-right sidebar-animate">
+      <ul class="nav nav-pills nav-stacked">
+        
+        <div class="placeholder">
+          <h4 class="text-center">Signed as:</h4>
+         
+			<% if user_signed_in? %>
+			 <p class="text-center">
+         	 	<span class="text-muted"> <%= current_user.email %></span>
+         	 </p>
+         	<%else %>
+				<span class="text-muted">Visitor</span>
+          	<%end %>
+        </div>
+        <hr>
+        <li class="divider" role="separator"></li>
+        <% if user_signed_in? %>
+			 <% if current_user.is_editor? %>
+				<li class="<%= 'active' if params[:controller] == 'categories' %>" ><%= link_to"Categories", categories_path %></li>
+				<li class="<%= 'active' if params[:controller] == 'responsibles' %>"><%= link_to"Responsibles", responsibles_path %></li>
+				<li ><%= sidebar_link_to "Add Proyects" , new_proyect_path %></li>
+		
+				<li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to"Configuser", users_path %></li>
+				
+			 <% end %>
+        	
+			<li ><%= sidebar_link_to "Change Password" , edit_user_registration_path %></li>
+			<li><%= link_to "Sign out", destroy_user_session_path, method: :delete, id: "exit", data: { confirm: 'Are you sure?' } %></li>
+		<% else %>
+			<li >
+				<%= sidebar_link_to "Sign In", new_user_session_path  %>
+			</li>
+			<li >
+				<%= sidebar_link_to "Sign up", new_user_registration_path  %>
+			</li>
+		<% end %>
+       
+       
+      </ul>
+      
+    </div>
+
+    <section class="jumbotron">
+		<div class="container">
+			<h1>AlphaLab</h1>
+			<p>Repositories</p>
+		</div>
+	</section>
+	 

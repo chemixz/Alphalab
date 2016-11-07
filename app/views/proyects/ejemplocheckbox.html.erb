@@ -1,0 +1,48 @@
+
+
+
+
+
+
+
+
+
+
+<select class="select" multiple="multiple" name="categories[]">
+	<% @categories.each do |category|%>
+		<div class="field">
+		<%= check_box_tag "categories[]", category.id, @proyect.categories.include?(category), :name => 'categories[]' %>
+		<%= label_tag :categories, category.name %>
+		</div>
+	<%end%> 
+</select>
+
+o
+<option value="<%= category.id %>"><%= category.name%></option>
+
+
+<div class="field">
+<%= check_box_tag "categories[]", category.id, @proyect.categories.include?(category), :name => 'categories[]' %>
+<%= label_tag :categories, category.name %>
+</div>
+
+
+
+ <%= select_tag :categories, options_for_select(@categories.collect{|category| [category.name,category.id]}), {},{:multiple => "multiple", :size => 10, :class=>'form-control selectpicker', 'data-live-search'=>true, 'data-style'=>'btn-success' } %>
+              
+<%= f.select :categories, options_for_select(@categories.collect{|c| [c.name,c.id]}, @proyect.categories.map{|c| c.id}), {}, {:multiple => "multiple", :class=>'form-control selectpicker', 'data-live-search'=>true, 'data-style'=>'btn-success'} %>
+
+<%= f.collection_select(:categories, Category.all, :id, :name, {:include_blank => 'Select category...'}, {:multiple => "multiple", :class=>'form-control selectpicker', 'data-live-search'=>true}) %>
+
+<%= select_tag "categories[]", :id, options_for_select(@categories.collect{|category| [category.name,category.id]},  ), {:multiple => "multiple", :size => 10, :class=>"form-control  selectpicker " , 'data-live-search'=>true } %>
+
+
+ <% @proyects.each do |proyect|%>
+                   <div class="field">
+                    <%= check_box_tag "proyects[]", proyect.id, @responsible.proyects.include?(proyect), :name => 'proyects[]' %>
+                    <%= label_tag :proyects, proyect.title %>
+                  </div>
+                <%end%>
+
+
+  

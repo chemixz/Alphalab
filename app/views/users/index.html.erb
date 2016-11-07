@@ -1,0 +1,30 @@
+<article class="  col-md-9 clearfix" >
+    <div class="row">
+    <h1>Users</h1>
+
+      <div class="col-xs-12 " style="margin-top: 1em;">
+         <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="30%">Email</th>
+                <th width="30%">Access Level</th>
+                <th width="40%" colspan="3" class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.email %></td>
+                  <td><%= user.permission_level %></td>
+                  <td class="text-center"><%= link_to "<span class=\"blue glyphicon glyphicon-sunglasses\"></span>".html_safe , user  %></td>
+                  <td class="text-center"><%= link_to "<span class=\"green glyphicon glyphicon-edit\"></span>".html_safe, edit_user_path(user) %></td>
+                  <td class="text-center"><%= link_to  "<span class=\"red glyphicon glyphicon-trash\"></span>".html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+      </div>
+  </div>
+</article>
+
+

@@ -1,0 +1,24 @@
+<aside class="col-md-3 hidden-xs hidden-sm" >  <!-- ocultar en dispositivos peq -->
+	<h4>Categories</h4>
+	<div class="list-group">
+	<% @categories.each do |category|  %>
+		<%= aside_link_to category.name, category %>
+	<% end %>
+
+	</div>
+	<h4>Recent Proyects</h4>
+	<div class="list-group">
+		<% @proyectaside.each do |pro_aside|  %>
+
+			<%= aside_link_to (" <h4 class=\" list-group-item-heading\"> #{ pro_aside.title} </h4> <p class=\" list-group-intem-text\"> #{truncate(pro_aside.body,lenght:90) } </p>").html_safe, pro_aside %>
+			
+		<% end %>
+	</div>	
+	<h4>Currents Responsibles</h4>
+	<div class="list-group">
+		<% @responsibles.each do |responsible|  %>
+
+			<%= aside_link_to (" <h4 class=\" list-group-item-heading\"> #{responsible.first_name} </h4><p  class=\" list-group-intem-text\"> #{responsible.email} </p>").html_safe, responsible ,style:" " %>
+		<% end %>
+	</div>	
+</aside>

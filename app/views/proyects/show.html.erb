@@ -1,0 +1,44 @@
+
+<article class="col-md-9 post clearfix">
+  <% unless @proyect.cover_file_name.nil? %>
+    <img class="thumbnail img-medium" src="<%= @proyect.cover.url %>" alt="<%= @proyect.cover_file_name %>">
+  <% end %>
+  <div class="row">
+    <div class="col-xs-12  ">
+       <h1 class="text-center"> <%= @proyect.title %> </h1>
+      <p>
+        <strong>Categories</strong>
+        <% @proyect.categories.each do |category|%>
+         - <%= link_to category.name, category%> 
+        <%end%>
+      </p>
+      <p>
+       <strong>Responsibles: (<%= @proyect.responsibles.count %>)</strong> 
+        <% @proyect.responsibles.each do |responsible|%>
+            - <%= link_to responsible.first_name, responsible %> 
+        <%end%>
+      </p>
+      <p class="text-left">
+        <% unless @proyect.user.nil? %>
+          Posted By: <strong><%= @proyect.user.email %></strong>
+        <% end %>
+      </p>
+      <p class="text-left">
+        <strong>Start date:</strong>
+        <%= @proyect.start_date %>
+      </p>
+      <div class="text-justify center-block">
+        <b>Description :</b> <%= Sanitize.fragment(@proyect.body, Sanitize::Config::RELAXED).html_safe%>
+      </div>
+    </div>  
+  </div>
+  <div class="col-xs-12 text-center" style="margin-top: 2em;">
+   <% if user_signed_in? %>
+     <% if current_user.is_editor? %>
+        <%= link_to "Edit" , edit_proyect_path(@proyect) , class:"btn btn-success "  %> 
+      <%end%>
+  <%end%>
+   <%= link_to "Back" , proyects_path , class:"btn btn-warning "  %> 
+  </div>
+
+</article>

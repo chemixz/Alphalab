@@ -1,0 +1,67 @@
+<%= form_for(@responsible) do |f| %>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-7 col-md-offset-2">
+    <% if @responsible.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@responsible.errors.count, "error") %> prohibited this responsible from being saved:</h2>
+
+        <ul>
+          <% @responsible.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <div class="" style="padding-left:0">
+       <%= f.label "Photo", class: "control-label" %>
+        <div class="">
+          <div class="thumbnail" style="overflow:hidden;">
+            <div id="target">
+              <%= image_tag @responsible.photo.url( :thumb ), class: "img-responsive" %>
+            </div>
+            <br>
+            <%= f.file_field :photo, class: "image" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name , class:"form-control"%>
+    </div>
+   <div class="form-group">
+      <%= f.label :last_name %><br>
+      <%= f.text_field :last_name,class:"form-control" %>
+    </div>
+
+   <div class="form-group">
+      <%= f.label :email  %><br>
+      <%= f.text_field :email,class:"form-control" %>
+    </div>
+   <div class="form-group">
+      <%= f.label :address %><br>
+      <%= f.text_area :address ,class:"form-control"%>
+    </div>
+    <div class=" ">
+       <% if user_signed_in? %>
+           <% if current_user.is_admin? %>
+            <div class="field">
+              <%= f.label "Responsiblities" %><br>
+                <% if @proyects.present? %>
+                     <%= f.select :proyects, options_for_select(@proyects.collect{|proyect| [proyect.title,proyect.id]}, @responsible.proyects.map{|proyect| proyect.id}), {}, {:multiple => "multiple", :class=>'form-control selectpicker', 'data-live-search'=>true , 'data-style'=>'btn-success'} %>
+                <% else %>
+                 <p>No Responsibilities</p>
+                 <%= link_to  "Add New" , new_responsible_path%>
+                <%end%>
+           </div>
+          <% end %>
+      <% end %>
+   </div>
+    <div class=" col-xs-12 text-center" style="margin-top: 1em;">
+      <%= f.submit class:"btn btn-primary" %>
+       <%= link_to 'Back', responsibles_path, class:"btn btn-warning" %>
+    </div>
+  </div>
+</div>
+<% end %>

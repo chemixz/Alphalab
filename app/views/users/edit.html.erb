@@ -1,0 +1,55 @@
+ <article class="  col-md-9 clearfix" >
+    <div class="row">
+	   <div class="col-xs-12">
+	   <%= form_for(@user) do |f| %>
+			   <h1>Editing User</h1>
+			     <% if @user.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+			      <ul>
+			      <% @user.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+		     <table class="table table-striped ">
+		        <thead>
+		          <th width="35%" class="text-center"> <%= f.label :email %></th>
+		          <th width="35%" class="text-center">  <%= f.label :permission_level %><br></th>
+		          <th width="35%" class="text-center">  <%= f.label :nickname %><br></th>
+		          <th width="30%" class="text-center">Actions</th>
+		        </thead>
+		        <tbody>
+		          <td class="text-center"> 
+		            <div class="field">
+		              <%= f.text_field :email %>
+		            </div>
+		          </td>
+		          <td class="text-center">
+		            <div class="field">
+		             <%= f.number_field :permission_level, min: 1, max:3  %>
+		            </div>
+		          </td>
+		          <td class="text-center"> 
+		            <div class="field">
+		              <%= f.text_field :nickname %>
+		            </div>
+		          </td>
+		          <td class="text-center">
+		            <div class="  ">
+		              <%= f.submit class:"btn btn-primary" %>
+		            </div>
+		          </td>
+		        </tbody>
+		      </table>
+		</div>
+		<% end %>
+	   <div class="actions col-xs-12 text-center">
+		<%= link_to 'Back',  users_path ,class:'btn btn-warning'%>
+		</div>
+	 </div>
+</article>
+ 
+
